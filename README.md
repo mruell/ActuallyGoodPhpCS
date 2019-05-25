@@ -3,6 +3,8 @@ A php coding standard, that does not suck.
 
 I code a lot with JS and use eslint with standardJS. As there is no Coding Standard, that is ever so slightly near that I created one.
 
+Important was, that the coding standard is supported by a linter that runs with VS Code, as this is my main development IDE.
+
 Have fun with it and give love to the projects, this does depend on ♥
 
 ## How to install
