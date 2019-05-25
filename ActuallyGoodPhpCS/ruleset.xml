@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ActuallyGoodPhpCS" xsi:noNamespaceSchemaLocation="../../../phpcs.xsd">
-	<description>The MySource coding standard builds on the Squiz coding standard. Currently used for MySource Mini development.</description>
+	<description>A coding standard, that tries to be as close to StandardJS, as possible. For people like me, who use PHP and JS a lot within the same project and want a consistent coding style.</description>
 
 	<!-- Lines can be 120 chars long, but never show errors -->
 	<rule ref="Generic.Files.LineLength">
@@ -88,7 +88,7 @@
 	<!-- Disallow else if -->
 	<rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
 
-	<!-- Disallow else if -->
+	<!-- Format switch statements correctly -->
 	<rule ref="PSR2.ControlStructures.SwitchDeclaration"/>
 
 	<!-- No empty space between function body and closing brace -->
