@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ActuallyGoodPhpCS" xsi:noNamespaceSchemaLocation="../../../phpcs.xsd">
+	<description>The MySource coding standard builds on the Squiz coding standard. Currently used for MySource Mini development.</description>
+
+	<!-- Lines can be 120 chars long, but never show errors -->
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="120"/>
+			<property name="absoluteLineLimit" value="0"/>
+		</properties>
+	</rule>
+
+	<!-- Use Unix newlines -->
+	<rule ref="Generic.Files.LineEndings">
+		<properties>
+			<property name="eolChar" value="\n"/>
+		</properties>
+	</rule>
+
+	<!-- Curly brace always on same line, 1 space before curly brace -->
+	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+	<rule ref="Generic.Classes.OpeningBraceSameLine"/>
+
+	<!-- Newline at end of file -->
+	<rule ref="PSR2.Files.EndFileNewline"/>
+
+	<!-- Use 1 tab for indentation -->
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="indent" type="integer" value="1" />
+			<property name="exact" type="boolean" value="true" />
+			<property name="tabIndent" type="boolean" value="true" />
+			<property name="ignoreIndentationTokens" type="array">
+				<element value="T_COMMENT"/>
+				<element value="T_DOC_COMMENT_OPEN_TAG"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Force array shorthand style -->
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+
+	<!-- Force array intendation -->
+	<rule ref="Generic.Arrays.ArrayIndent">
+		<properties>
+			<property name="indent" type="integer" value="1" />
+		</properties>
+	</rule>
+
+	<!-- No duplicate class names allowed -->
+	<rule ref="Generic.Classes.DuplicateClassName"/>
+
+	<!-- Warn about TODO and FIXME in comments -->
+	<rule ref="Generic.Commenting.Fixme"/>
+	<rule ref="Generic.Commenting.Todo"/>
+
+	<!-- No inline control structures -->
+	<rule ref="Generic.ControlStructures.InlineControlStructure"/>
+
+	<!-- No useless concat of strings -->
+	<rule ref="Generic.Strings.UnnecessaryStringConcat"/>
+
+	<!-- No deprecated functions -->
+	<rule ref="Generic.PHP.DeprecatedFunctions"/>
+
+	<!-- Lowercase constants, types and keywords -->
+	<rule ref="Generic.PHP.LowerCaseConstant"/>
+	<rule ref="Generic.PHP.LowerCaseType"/>
+	<rule ref="Generic.PHP.LowerCaseKeyword"/>
+
+	<!-- <?php has to be first thing in file> -->
+	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag"/>
+
+	<!-- Disallow some functions -->
+	<rule ref="Generic.PHP.ForbiddenFunctions"/>
+
+	<!-- No unused -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+	<rule ref="MySource.Channels.IncludeOwnSystem"/>
+	<rule ref="MySource.Channels.IncludeOwnSystem"/>
+	<rule ref="MySource.Channels.UnusedSystem"/>
+
+	<!-- Method and variable in classes naming convention -->
+	<rule ref="PSR1.Methods.CamelCapsMethodName"/>
+	<rule ref="PSR2.Methods.MethodDeclaration"/>
+	<rule ref="Squiz.NamingConventions.ValidVariableName"/>
+
+	<!-- Disallow else if -->
+	<rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
+
+	<!-- Disallow else if -->
+	<rule ref="PSR2.ControlStructures.SwitchDeclaration"/>
+
+	<!-- No empty space between function body and closing brace -->
+	<rule ref="PSR2.Methods.FunctionClosingBrace"/>
+
+	<!-- Warn about non executable code -->
+	<rule ref="Squiz.PHP.NonExecutableCode"/>
+
+	<!-- Disallow space before semicolon -->
+	<rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
+
+	<!-- Disallow unneccesary whitespace -->
+	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+
+	<!-- No unused variables - https://github.com/sirbrillig/phpcs-variable-analysis/ needs to be installed -->
+	<rule ref="VariableAnalysis.CodeAnalysis.VariableAnalysis"/>
+
+	<!-- Warn about for loops that could be while loops -->
+	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"/>
+
+	<!-- Warn about mistakes in for loop increments -->
+	<rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
+
+	<!-- Warn about if statements that are always true or false -->
+	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+
+	<!-- Detect unnecessary final modifier -->
+	<rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
+
+	<!-- Detect useless overriding of a method -->
+	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+
+	<!-- Ensure doc block formatting -->
+	<rule ref="Generic.Commenting.DocComment"/>
+
+	<!-- Warn about BOM -->
+	<rule ref="Generic.Files.ByteOrderMark"/>
+
+	<!-- Force lowercase file names
+	<rule ref="Generic.Files.LowercasedFilename"/> -->
+
+	<!-- Enforce only one statement per line -->
+	<rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+
+	<!-- Force space after cast -->
+	<rule ref="Generic.Formatting.SpaceAfterCast"/>
+
+	<!-- Enforce spacing in function calls -->
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+
+	<!-- Disallow PHP 4 constructors -->
+	<rule ref="Generic.NamingConventions.ConstructorName"/>
+
+	<!-- Warn about too deep nesting -->
+	<rule ref="Generic.Metrics.NestingLevel">
+		<properties>
+			<property name="nestingLevel" type="integer" value="5" />
+		</properties>
+	</rule>
+
+	<!-- Disallow arbitary parantheses spacing -->
+	<rule ref="Generic.WhiteSpace.LanguageConstructSpacing"/>
+
+	<!-- Disallow silencing errors -->
+	<rule ref="Generic.PHP.NoSilencedErrors"/>
+</ruleset>

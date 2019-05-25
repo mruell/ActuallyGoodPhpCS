@@ -1,0 +1,21 @@
+{
+	"name": "intxcc/ActuallyGoodPhpCS",
+	"description": "A php coding standard, that does not suck.",
+	"type": "phpcodesniffer-standard",
+	"license": "BSD-2-Clause",
+	"authors": [
+			{
+					"name": "Marvin Alexander Rüll",
+					"email": "public@intx.cc"
+			}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"require" : {
+			"php" : ">=5.6.0"
+	},
+	"require-dev": {
+			"sirbrillig/phpcs-variable-analysis": "^1.1",
+			"squizlabs/php_codesniffer": "^3.1"
+	}
+}
