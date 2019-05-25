@@ -71,6 +71,7 @@ phpcs --config-set installed_paths "<GLOBAL_COMPOSER_PATH>\Composer\vendor\sirbr
 - [x] Warning if nesting level is bigger than 5
 - [x] Error if nesting level is bigger than 10
 - [x] Forbid silencing of errors
+- [x] Other cool stuff. Look in the phpcs.xml, the comments in there descibe all includes.
 
 ### To do
 
