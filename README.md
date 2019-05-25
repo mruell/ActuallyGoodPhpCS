@@ -1,7 +1,7 @@
 # ActuallyGoodPhpCS
 A php coding standard, that does not suck.
 
-I code a lot with JS and use eslint with standardJS. As there is no Coding Standard, that is ever so slightly near that I created one.
+I code a lot with JS and use eslint with standardJS. As there is no Coding Standard, that is ever so slightly near that, so I created one.
 
 Important was, that the coding standard is supported by a linter that runs with VS Code, as this is my main development IDE.
 
@@ -63,7 +63,7 @@ phpcs --config-set installed_paths "<GLOBAL_COMPOSER_PATH>\Composer\vendor\sirbr
 - [x] Show warning for all unused variables
 - [x] Force "elseif" instead of "else if"
 - [x] No unnecessary whitespace
-- [x] Enforce doc domment formatting
+- [x] Enforce doc comment formatting
 - [x] Check for BOM
 - [x] Forbid multiple statements in one line
 - [x] Space required after type cast
@@ -73,7 +73,7 @@ phpcs --config-set installed_paths "<GLOBAL_COMPOSER_PATH>\Composer\vendor\sirbr
 - [x] Forbid silencing of errors
 - [x] Other cool stuff. Look in the phpcs.xml, the comments in there descibe all includes.
 
-### To do
+### Planned features
 
 - [ ] Force function and variable names not in classes to snake_case
 - [ ] Multi line if statement formatting
