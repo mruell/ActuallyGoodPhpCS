@@ -56,6 +56,9 @@
 	<!-- No inline control structures -->
 	<rule ref="Generic.ControlStructures.InlineControlStructure"/>
 
+	<!-- Check signature of control structures (e.g. spacing) -->
+	<rule ref="PEAR.ControlStructures.ControlSignature"/>
+
 	<!-- No useless concat of strings -->
 	<rule ref="Generic.Strings.UnnecessaryStringConcat"/>
 
