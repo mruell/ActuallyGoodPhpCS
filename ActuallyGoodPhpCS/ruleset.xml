@@ -106,6 +106,24 @@
 	<!-- Disallow unneccesary whitespace -->
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
 
+	<!-- Disallow arbitary spacing around logical operators -->
+	<rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
+
+	<!-- Disallow arbitary spacing around other operators -->
+	<rule ref="Squiz.WhiteSpace.OperatorSpacing"/>
+
+	<!-- Disallow arbitary spacing around object operators -->
+	<rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing"/>
+
+	<!-- Checks the separation between functions and methods -->
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
+		<properties>
+			<property name="spacing" type="integer" value="1" />
+			<property name="spacingBeforeFirst" type="integer" value="1" />
+			<property name="spacingAfterLast" type="integer" value="1" />
+		</properties>
+	</rule>
+
 	<!-- No unused variables - https://github.com/sirbrillig/phpcs-variable-analysis/ needs to be installed -->
 	<rule ref="VariableAnalysis.CodeAnalysis.VariableAnalysis"/>
 
