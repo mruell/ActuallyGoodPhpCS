@@ -202,4 +202,7 @@
 
 	<!-- Disallow silencing errors -->
 	<rule ref="Generic.PHP.NoSilencedErrors"/>
+
+	<!-- Disallow eval -->
+	<rule ref="Squiz.PHP.Eval"/>
 </ruleset>
