@@ -50,8 +50,7 @@
 	<!-- No duplicate class names allowed -->
 	<rule ref="Generic.Classes.DuplicateClassName"/>
 
-	<!-- Warn about TODO and FIXME in comments -->
-	<rule ref="Generic.Commenting.Fixme"/>
+	<!-- Warn about TODO in comments -->
 	<rule ref="Generic.Commenting.Todo"/>
 
 	<!-- No inline control structures -->
@@ -83,13 +82,17 @@
 	<!-- Method and variable in classes naming convention -->
 	<rule ref="PSR1.Methods.CamelCapsMethodName"/>
 	<rule ref="PSR2.Methods.MethodDeclaration"/>
-	<rule ref="Squiz.NamingConventions.ValidVariableName"/>
+	<!-- <rule ref="Squiz.NamingConventions.ValidVariableName"/> -->
 
 	<!-- Disallow else if -->
 	<rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
 
 	<!-- Format switch statements correctly -->
-	<rule ref="PSR2.ControlStructures.SwitchDeclaration"/>
+	<rule ref="PSR2.ControlStructures.SwitchDeclaration">
+		<properties>
+			<property name="indent" type="integer" value="1" />
+		</properties>
+	</rule>
 
 	<!-- No empty space between function body and closing brace -->
 	<rule ref="PSR2.Methods.FunctionClosingBrace"/>

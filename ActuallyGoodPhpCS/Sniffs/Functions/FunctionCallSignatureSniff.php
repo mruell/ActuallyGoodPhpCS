@@ -376,36 +376,38 @@ class FunctionCallSignatureSniff implements Sniff {
 			}
 		}
 
-		$next = $phpcsFile->findNext(Tokens::$emptyTokens, ($openBracket + 1), null, true);
-		if (
-			$tokens[$next]['type'] !== 'T_OPEN_SHORT_ARRAY' && // Allow array declaration on same line
-			$tokens[$next]['line'] === $tokens[$openBracket]['line']
-		) {
-			$error = 'Opening parenthesis of a multi-line function call must be the last content on the line';
-			$fix   = $phpcsFile->addFixableError($error, $stackPtr, 'ContentAfterOpenBracket');
-			if ($fix === true) {
-				$phpcsFile->fixer->addContent(
-					$openBracket,
-					$phpcsFile->eolChar.str_repeat(' ', ($foundFunctionIndent + $this->indent))
-				);
-			}
-		}
+		// TODO - Allow call in one line, if the only multiple line is for a function declaration
+		// $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($openBracket + 1), null, true);
+		// if (
+		// 	$tokens[$next]['type'] !== 'T_OPEN_SHORT_ARRAY' && // Allow array declaration on same line
+		// 	$tokens[$next]['line'] === $tokens[$openBracket]['line']
+		// ) {
+		// 	$error = 'Opening parenthesis of a multi-line function call must be the last content on the line';
+		// 	$fix   = $phpcsFile->addFixableError($error, $stackPtr, 'ContentAfterOpenBracket');
+		// 	if ($fix === true) {
+		// 		$phpcsFile->fixer->addContent(
+		// 			$openBracket,
+		// 			$phpcsFile->eolChar.str_repeat(' ', ($foundFunctionIndent + $this->indent))
+		// 		);
+		// 	}
+		// }
 
+		// TODO - Allow multiple closing commas in last line
 		$closeBracket = $tokens[$openBracket]['parenthesis_closer'];
-		$prev         = $phpcsFile->findPrevious(T_WHITESPACE, ($closeBracket - 1), null, true);
-		if (
-			$tokens[$prev]['type'] !== 'T_CLOSE_SHORT_ARRAY' && // Allow end of array declaration on same line
-			$tokens[$prev]['line'] === $tokens[$closeBracket]['line']
-		) {
-			$error = 'Closing parenthesis of a multi-line function call must be on a line by itself';
-			$fix   = $phpcsFile->addFixableError($error, $closeBracket, 'CloseBracketLine');
-			if ($fix === true) {
-				$phpcsFile->fixer->addContentBefore(
-					$closeBracket,
-					$phpcsFile->eolChar.str_repeat(' ', ($foundFunctionIndent + $this->indent))
-				);
-			}
-		}
+		// $prev         = $phpcsFile->findPrevious(T_WHITESPACE, ($closeBracket - 1), null, true);
+		// if (
+		// 	$tokens[$prev]['type'] !== 'T_CLOSE_SHORT_ARRAY' && // Allow end of array declaration on same line
+		// 	$tokens[$prev]['line'] === $tokens[$closeBracket]['line']
+		// ) {
+		// 	$error = 'Closing parenthesis of a multi-line function call must be on a line by itself';
+		// 	$fix   = $phpcsFile->addFixableError($error, $closeBracket, 'CloseBracketLine');
+		// 	if ($fix === true) {
+		// 		$phpcsFile->fixer->addContentBefore(
+		// 			$closeBracket,
+		// 			$phpcsFile->eolChar.str_repeat(' ', ($foundFunctionIndent + $this->indent))
+		// 		);
+		// 	}
+		// }
 
 		// Each line between the parenthesis should be indented n spaces.
 		$lastLine = ($tokens[$openBracket]['line'] - 1);

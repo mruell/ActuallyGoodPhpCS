@@ -677,87 +677,87 @@ class ArrayDeclarationSniff implements Sniff {
 				continue;
 			}
 
-			if ($tokens[$index['index']]['column'] !== $indicesStart
-				&& ($index['index'] - 1) !== $arrayStart
-			) {
-				$expected = ($indicesStart - 1);
-				$found    = ($tokens[$index['index']]['column'] - 1);
-				$error    = 'Array key not aligned correctly; expected %s spaces but found %s';
-				$data     = [
-					$expected,
-					$found
-				];
+			// if ($tokens[$index['index']]['column'] !== $indicesStart
+			// 	&& ($index['index'] - 1) !== $arrayStart
+			// ) {
+			// 	$expected = ($indicesStart - 1);
+			// 	$found    = ($tokens[$index['index']]['column'] - 1);
+			// 	$error    = 'Array key not aligned correctly; expected %s spaces but found %s';
+			// 	$data     = [
+			// 		$expected,
+			// 		$found
+			// 	];
 
-				$fix = $phpcsFile->addFixableError($error, $index['index'], 'KeyNotAligned', $data);
-				if ($fix === true) {
-					if ($found === 0 || $tokens[($index['index'] - 1)]['code'] !== T_WHITESPACE) {
-						$phpcsFile->fixer->addContent(($index['index'] - 1), str_repeat(' ', $expected));
-					} else {
-						$phpcsFile->fixer->replaceToken(($index['index'] - 1), str_repeat(' ', $expected));
-					}
-				}
-			}
+			// 	$fix = $phpcsFile->addFixableError($error, $index['index'], 'KeyNotAligned', $data);
+			// 	if ($fix === true) {
+			// 		if ($found === 0 || $tokens[($index['index'] - 1)]['code'] !== T_WHITESPACE) {
+			// 			$phpcsFile->fixer->addContent(($index['index'] - 1), str_repeat(' ', $expected));
+			// 		} else {
+			// 			$phpcsFile->fixer->replaceToken(($index['index'] - 1), str_repeat(' ', $expected));
+			// 		}
+			// 	}
+			// }
 
-			$arrowStart = ($tokens[$index['index']]['column'] + $maxLength + 1);
-			if ($tokens[$index['arrow']]['column'] !== $arrowStart) {
-				$expected = ($arrowStart - ($index['index_length'] + $tokens[$index['index']]['column']));
-				$found    = ($tokens[$index['arrow']]['column'] - ($index['index_length'] + $tokens[$index['index']]['column']));
-				$error    = 'Array double arrow not aligned correctly; expected %s space(s) but found %s';
-				$data     = [
-					$expected,
-					$found
-				];
+			// $arrowStart = ($tokens[$index['index']]['column'] + $maxLength + 1);
+			// if ($tokens[$index['arrow']]['column'] !== $arrowStart) {
+			// 	$expected = ($arrowStart - ($index['index_length'] + $tokens[$index['index']]['column']));
+			// 	$found    = ($tokens[$index['arrow']]['column'] - ($index['index_length'] + $tokens[$index['index']]['column']));
+			// 	$error    = 'Array double arrow not aligned correctly; expected %s space(s) but found %s';
+			// 	$data     = [
+			// 		$expected,
+			// 		$found
+			// 	];
 
-				$fix = $phpcsFile->addFixableError($error, $index['arrow'], 'DoubleArrowNotAligned', $data);
-				if ($fix === true) {
-					if ($found === 0) {
-						$phpcsFile->fixer->addContent(($index['arrow'] - 1), str_repeat(' ', $expected));
-					} else {
-						$phpcsFile->fixer->replaceToken(($index['arrow'] - 1), str_repeat(' ', $expected));
-					}
-				}
+			// 	$fix = $phpcsFile->addFixableError($error, $index['arrow'], 'DoubleArrowNotAligned', $data);
+			// 	if ($fix === true) {
+			// 		if ($found === 0) {
+			// 			$phpcsFile->fixer->addContent(($index['arrow'] - 1), str_repeat(' ', $expected));
+			// 		} else {
+			// 			$phpcsFile->fixer->replaceToken(($index['arrow'] - 1), str_repeat(' ', $expected));
+			// 		}
+			// 	}
 
-				continue;
-			}
+			// 	continue;
+			// }
 
-			$valueStart = ($arrowStart + 3);
-			if ($tokens[$index['value']]['column'] !== $valueStart) {
-				$expected = ($valueStart - ($tokens[$index['arrow']]['length'] + $tokens[$index['arrow']]['column']));
+			// $valueStart = ($arrowStart + 3);
+			// if ($tokens[$index['value']]['column'] !== $valueStart) {
+			// 	$expected = ($valueStart - ($tokens[$index['arrow']]['length'] + $tokens[$index['arrow']]['column']));
 
-				$found    = (
-					$tokens[$index['value']]['column']
-					- ($tokens[$index['arrow']]['length']
-					+ $tokens[$index['arrow']]['column'])
-				);
+			// 	$found    = (
+			// 		$tokens[$index['value']]['column']
+			// 		- ($tokens[$index['arrow']]['length']
+			// 		+ $tokens[$index['arrow']]['column'])
+			// 	);
 
-				if ($found < 0) {
-					$found = 'newline';
-				}
+			// 	if ($found < 0) {
+			// 		$found = 'newline';
+			// 	}
 
-				$error = 'Array value not aligned correctly; expected %s space(s) but found %s';
-				$data  = [
-					$expected,
-					$found
-				];
+			// 	$error = 'Array value not aligned correctly; expected %s space(s) but found %s';
+			// 	$data  = [
+			// 		$expected,
+			// 		$found
+			// 	];
 
-				$fix = $phpcsFile->addFixableError($error, $index['arrow'], 'ValueNotAligned', $data);
-				if ($fix === true) {
-					if ($found === 'newline') {
-						$prev = $phpcsFile->findPrevious(T_WHITESPACE, ($index['value'] - 1), null, true);
-						$phpcsFile->fixer->beginChangeset();
-						for ($i = ($prev + 1); $i < $index['value']; $i++) {
-							$phpcsFile->fixer->replaceToken($i, '');
-						}
+			// 	$fix = $phpcsFile->addFixableError($error, $index['arrow'], 'ValueNotAligned', $data);
+			// 	if ($fix === true) {
+			// 		if ($found === 'newline') {
+			// 			$prev = $phpcsFile->findPrevious(T_WHITESPACE, ($index['value'] - 1), null, true);
+			// 			$phpcsFile->fixer->beginChangeset();
+			// 			for ($i = ($prev + 1); $i < $index['value']; $i++) {
+			// 				$phpcsFile->fixer->replaceToken($i, '');
+			// 			}
 
-						$phpcsFile->fixer->replaceToken(($index['value'] - 1), str_repeat(' ', $expected));
-						$phpcsFile->fixer->endChangeset();
-					} elseif ($found === 0) {
-						$phpcsFile->fixer->addContent(($index['value'] - 1), str_repeat(' ', $expected));
-					} else {
-						$phpcsFile->fixer->replaceToken(($index['value'] - 1), str_repeat(' ', $expected));
-					}
-				}
-			}
+			// 			$phpcsFile->fixer->replaceToken(($index['value'] - 1), str_repeat(' ', $expected));
+			// 			$phpcsFile->fixer->endChangeset();
+			// 		} elseif ($found === 0) {
+			// 			$phpcsFile->fixer->addContent(($index['value'] - 1), str_repeat(' ', $expected));
+			// 		} else {
+			// 			$phpcsFile->fixer->replaceToken(($index['value'] - 1), str_repeat(' ', $expected));
+			// 		}
+			// 	}
+			// }
 
 			// Check each line ends in a comma.
 			$valueStart = $index['value'];
@@ -783,27 +783,27 @@ class ArrayDeclarationSniff implements Sniff {
 				$valueLine++;
 			}
 
-			if ($nextComma === false || ($tokens[$nextComma]['line'] !== $valueLine)) {
-				$error = 'Each line in an array declaration must end in a comma';
-				$fix   = $phpcsFile->addFixableError($error, $index['value'], 'NoComma');
+			// if ($nextComma === false || ($tokens[$nextComma]['line'] !== $valueLine)) {
+			// 	$error = 'Each line in an array declaration must end in a comma';
+			// 	$fix   = $phpcsFile->addFixableError($error, $index['value'], 'NoComma');
 
-				if ($fix === true) {
-					// Find the end of the line and put a comma there.
-					for ($i = ($index['value'] + 1); $i <= $arrayEnd; $i++) {
-						if ($tokens[$i]['line'] > $valueLine) {
-							break;
-						}
-					}
+			// 	if ($fix === true) {
+			// 		// Find the end of the line and put a comma there.
+			// 		for ($i = ($index['value'] + 1); $i <= $arrayEnd; $i++) {
+			// 			if ($tokens[$i]['line'] > $valueLine) {
+			// 				break;
+			// 			}
+			// 		}
 
-					$phpcsFile->fixer->beginChangeset();
-					$phpcsFile->fixer->addContentBefore(($i - 1), ',');
-					if ($nextComma !== false) {
-						$phpcsFile->fixer->replaceToken($nextComma, '');
-					}
+			// 		$phpcsFile->fixer->beginChangeset();
+			// 		$phpcsFile->fixer->addContentBefore(($i - 1), ',');
+			// 		if ($nextComma !== false) {
+			// 			$phpcsFile->fixer->replaceToken($nextComma, '');
+			// 		}
 
-					$phpcsFile->fixer->endChangeset();
-				}
-			}
+			// 		$phpcsFile->fixer->endChangeset();
+			// 	}
+			// }
 
 			// Check that there is no space before the comma.
 			if ($nextComma !== false && $tokens[($nextComma - 1)]['code'] === T_WHITESPACE) {
