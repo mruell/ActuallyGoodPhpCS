@@ -59,6 +59,9 @@
 	<!-- Check signature of control structures (e.g. spacing) -->
 	<rule ref="PEAR.ControlStructures.ControlSignature"/>
 
+	<!-- FIXME -->
+	<!-- <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/> -->
+
 	<!-- No useless concat of strings -->
 	<rule ref="Generic.Strings.UnnecessaryStringConcat">
 		<properties>
