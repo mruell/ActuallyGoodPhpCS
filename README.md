@@ -72,14 +72,14 @@ phpcs --config-set installed_paths "<GLOBAL_COMPOSER_PATH>\Composer\vendor\sirbr
 - [x] Error if nesting level is bigger than 10
 - [x] Forbid silencing of errors
 - [x] Other cool stuff. Look in the phpcs.xml, the comments in there descibe all includes.
+- [x] Space surrounding dots to concat strings
+- [x] Forbid empty lines at end or beginning of function and class declaration
 
 ### Planned features
 
 - [ ] Force function and variable names not in classes to snake_case
 - [ ] Multi line if statement formatting
 - [ ] Forbid multiple empty lines in whole file
-- [ ] Forbid single empty lines after and at end of class or function declaration
-- [ ] Space surrounding dots to concat strings
 - [ ] dirname(__FILE__) => __DIR__
 
 ## Feel free to send me pull requests.

@@ -106,6 +106,9 @@
 	<!-- Disallow unneccesary whitespace -->
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
 
+	<!-- Disallow empty line after opening brace of function -->
+	<rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace"/>
+
 	<!-- Disallow arbitary spacing around logical operators -->
 	<rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
 
@@ -119,8 +122,8 @@
 	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
 		<properties>
 			<property name="spacing" type="integer" value="1" />
-			<property name="spacingBeforeFirst" type="integer" value="1" />
-			<property name="spacingAfterLast" type="integer" value="1" />
+			<property name="spacingBeforeFirst" type="integer" value="0" />
+			<property name="spacingAfterLast" type="integer" value="0" />
 		</properties>
 	</rule>
 
@@ -157,6 +160,9 @@
 	<!-- Force space after cast -->
 	<rule ref="Generic.Formatting.SpaceAfterCast"/>
 
+	<!-- Force no space in cast -->
+	<rule ref="Squiz.WhiteSpace.CastSpacing"/>
+
 	<!-- Enforce spacing in function calls -->
 	<rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
 
@@ -171,7 +177,18 @@
 	</rule>
 
 	<!-- Disallow arbitary parantheses spacing -->
-	<rule ref="Generic.WhiteSpace.LanguageConstructSpacing"/>
+	<rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
+
+	<!-- Makes sure that any strings that are "echoed" are not enclosed in brackets -->
+	<rule ref="Squiz.Strings.EchoedStrings"/>
+
+	<!-- Enforce whitespace for concatenation of strings -->
+	<rule ref="Squiz.Strings.ConcatenationSpacing">
+		<properties>
+			<property name="spacing" type="integer" value="1" />
+			<property name="ignoreNewlines" type="boolean" value="true" />
+		</properties>
+	</rule>
 
 	<!-- Disallow silencing errors -->
 	<rule ref="Generic.PHP.NoSilencedErrors"/>
