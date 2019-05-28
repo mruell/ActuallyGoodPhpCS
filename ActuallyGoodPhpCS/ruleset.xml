@@ -72,7 +72,8 @@
 	<!-- No deprecated functions -->
 	<rule ref="Generic.PHP.DeprecatedFunctions"/>
 
-	<!-- Lowercase constants, types and keywords -->
+	<!-- Lowercase constants, php functions, types and keywords -->
+	<rule ref="Squiz.PHP.LowercasePHPFunctions"/>
 	<rule ref="Generic.PHP.LowerCaseConstant"/>
 	<rule ref="Generic.PHP.LowerCaseType"/>
 	<rule ref="Generic.PHP.LowerCaseKeyword"/>
@@ -203,6 +204,12 @@
 	<!-- Disallow silencing errors -->
 	<rule ref="Generic.PHP.NoSilencedErrors"/>
 
+	<!-- Warn about commented out code -->
+	<rule ref="Squiz.PHP.CommentedOutCode"/>
+
 	<!-- Disallow eval -->
 	<rule ref="Squiz.PHP.Eval"/>
+
+	<!-- FIXME -->
+	<rule ref="Squiz.Classes.ValidClassName"/>
 </ruleset>
