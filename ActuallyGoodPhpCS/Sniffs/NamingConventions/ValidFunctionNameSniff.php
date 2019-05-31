@@ -39,8 +39,8 @@ class ValidFunctionNameSniff extends PEARValidFunctionNameSniff {
 		}
 
 		if (CustomCommon::isSnakeCase($functionName) === false) {
-			$error = 'Function name "%s" is not in camel caps format';
-			$phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $errorData);
+			$error = 'Function name "%s" is not in camel case format';
+			$phpcsFile->addError($error, $stackPtr, 'NotCamelCase', $errorData);
 		}
 	}
 }

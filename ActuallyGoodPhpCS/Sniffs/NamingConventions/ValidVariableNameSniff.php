@@ -68,7 +68,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff {
 		// // There is no way for us to know if the var is public or private,
 		// // so we have to ignore a leading underscore if there is one and just
 		// // check the main part of the variable name.
-		$originalVarName = $varName;
+		// $originalVarName = $varName;
 		// if (substr($varName, 0, 1) === '_') {
 		// 	$objOperator = $phpcsFile->findPrevious([T_WHITESPACE], ($stackPtr - 1), null, true);
 		// 	if ($tokens[$objOperator]['code'] === T_DOUBLE_COLON) {
@@ -84,14 +84,14 @@ class ValidVariableNameSniff extends AbstractVariableSniff {
 		// 	}
 		// }
 
-		if (
-			CustomCommon::isSnakeCase($varName) === false &&
-			Common::isUnderscoreName($varName) === false
-		) {
-			$error = 'Variable "%s" is not in valid snake case format';
-			$data  = [$originalVarName];
-			$phpcsFile->addError($error, $stackPtr, 'NotSnakeCase', $data);
-		}
+		// if (
+		// 	CustomCommon::isSnakeCase($varName) === false &&
+		// 	Common::isUnderscoreName($varName) === false
+		// ) {
+		// 	$error = 'Variable "%s" is not in valid snake case format';
+		// 	$data  = [$originalVarName];
+		// 	$phpcsFile->addError($error, $stackPtr, 'NotSnakeCase', $data);
+		// }
 	}
 
 	/**
