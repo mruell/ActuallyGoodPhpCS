@@ -64,24 +64,25 @@ class ValidVariableNameSniff extends AbstractVariableSniff {
 			}//end if
 		}//end if
 
-		// There is no way for us to know if the var is public or private,
-		// so we have to ignore a leading underscore if there is one and just
-		// check the main part of the variable name.
+		// TODO - Allow intances of classes in camelCase
+		// // There is no way for us to know if the var is public or private,
+		// // so we have to ignore a leading underscore if there is one and just
+		// // check the main part of the variable name.
 		$originalVarName = $varName;
-		if (substr($varName, 0, 1) === '_') {
-			$objOperator = $phpcsFile->findPrevious([T_WHITESPACE], ($stackPtr - 1), null, true);
-			if ($tokens[$objOperator]['code'] === T_DOUBLE_COLON) {
-				// The variable lives within a class, and is referenced like
-				// this: MyClass::$_variable, so we don't know its scope.
-				$inClass = true;
-			} else {
-				$inClass = $phpcsFile->hasCondition($stackPtr, Tokens::$ooScopeTokens);
-			}
+		// if (substr($varName, 0, 1) === '_') {
+		// 	$objOperator = $phpcsFile->findPrevious([T_WHITESPACE], ($stackPtr - 1), null, true);
+		// 	if ($tokens[$objOperator]['code'] === T_DOUBLE_COLON) {
+		// 		// The variable lives within a class, and is referenced like
+		// 		// this: MyClass::$_variable, so we don't know its scope.
+		// 		$inClass = true;
+		// 	} else {
+		// 		$inClass = $phpcsFile->hasCondition($stackPtr, Tokens::$ooScopeTokens);
+		// 	}
 
-			if ($inClass === true) {
-				$varName = substr($varName, 1);
-			}
-		}
+		// 	if ($inClass === true) {
+		// 		$varName = substr($varName, 1);
+		// 	}
+		// }
 
 		if (
 			CustomCommon::isSnakeCase($varName) === false &&

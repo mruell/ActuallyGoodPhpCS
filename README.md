@@ -82,6 +82,7 @@ phpcs --config-set installed_paths "<GLOBAL_COMPOSER_PATH>\Composer\vendor\sirbr
 - [ ] Forbid multiple empty lines in whole file
 - [ ] dirname(__FILE__) => __DIR__
 - [ ] No content on same line as after closing brace
+- [ ] Allow intances of classes in camelCase
 
 ### ToDo
 
