@@ -53,6 +53,9 @@
 	<!-- Warn about TODO in comments -->
 	<rule ref="Generic.Commenting.Todo"/>
 
+	<!-- Show FIXME as error -->
+	<rule ref="Generic.Commenting.Fixme"/>
+
 	<!-- No inline control structures -->
 	<rule ref="Generic.ControlStructures.InlineControlStructure"/>
 
