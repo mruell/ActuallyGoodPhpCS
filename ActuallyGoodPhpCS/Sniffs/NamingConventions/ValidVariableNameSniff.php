@@ -35,34 +35,35 @@ class ValidVariableNameSniff extends AbstractVariableSniff {
 			return;
 		}
 
-		$objOperator = $phpcsFile->findNext([T_WHITESPACE], ($stackPtr + 1), null, true);
-		if ($tokens[$objOperator]['code'] === T_OBJECT_OPERATOR) {
-			// Check to see if we are using a variable from an object.
-			$var = $phpcsFile->findNext([T_WHITESPACE], ($objOperator + 1), null, true);
-			if ($tokens[$var]['code'] === T_STRING) {
-				$bracket = $phpcsFile->findNext([T_WHITESPACE], ($var + 1), null, true);
-				if ($tokens[$bracket]['code'] !== T_OPEN_PARENTHESIS) {
-					$objVarName = $tokens[$var]['content'];
+		// Because this threw errors when using this..
+		// $objOperator = $phpcsFile->findNext([T_WHITESPACE], ($stackPtr + 1), null, true);
+		// if ($tokens[$objOperator]['code'] === T_OBJECT_OPERATOR) {
+		// 	// Check to see if we are using a variable from an object.
+		// 	$var = $phpcsFile->findNext([T_WHITESPACE], ($objOperator + 1), null, true);
+		// 	if ($tokens[$var]['code'] === T_STRING) {
+		// 		$bracket = $phpcsFile->findNext([T_WHITESPACE], ($var + 1), null, true);
+		// 		if ($tokens[$bracket]['code'] !== T_OPEN_PARENTHESIS) {
+		// 			$objVarName = $tokens[$var]['content'];
 
-					// There is no way for us to know if the var is public or
-					// private, so we have to ignore a leading underscore if there is
-					// one and just check the main part of the variable name.
-					$originalVarName = $objVarName;
-					if (substr($objVarName, 0, 1) === '_') {
-						$objVarName = substr($objVarName, 1);
-					}
+		// 			// There is no way for us to know if the var is public or
+		// 			// private, so we have to ignore a leading underscore if there is
+		// 			// one and just check the main part of the variable name.
+		// 			$originalVarName = $objVarName;
+		// 			if (substr($objVarName, 0, 1) === '_') {
+		// 				$objVarName = substr($objVarName, 1);
+		// 			}
 
-					if (
-						CustomCommon::isSnakeCase($objVarName) === false &&
-						Common::isUnderscoreName($objVarName) === false
-					) {
-						$error = 'Variable "%s" is not in valid snake case format';
-						$data  = [$originalVarName];
-						$phpcsFile->addError($error, $var, 'NotSnakeCase', $data);
-					}
-				}//end if
-			}//end if
-		}//end if
+		// 			if (
+		// 				CustomCommon::isSnakeCase($objVarName) === false &&
+		// 				Common::isUnderscoreName($objVarName) === false
+		// 			) {
+		// 				$error = 'Variable "%s" is not in valid snake case format';
+		// 				$data  = [$originalVarName];
+		// 				$phpcsFile->addError($error, $var, 'NotSnakeCase', $data);
+		// 			}
+		// 		}//end if
+		// 	}//end if
+		// }//end if
 
 		// TODO - Allow intances of classes in camelCase
 		// // There is no way for us to know if the var is public or private,
@@ -128,12 +129,14 @@ class ValidVariableNameSniff extends AbstractVariableSniff {
 				];
 				$phpcsFile->addError($error, $stackPtr, 'PublicHasUnderscore', $data);
 			}
-		} else {
-			if (substr($varName, 0, 1) !== '_') {
-				$error = 'Private member variable "%s" must contain a leading underscore';
-				$phpcsFile->addError($error, $stackPtr, 'PrivateNoUnderscore', $errorData);
-			}
 		}
+
+		// } else {
+		// 	if (substr($varName, 0, 1) !== '_') {
+		// 		$error = 'Private member variable "%s" must contain a leading underscore';
+		// 		$phpcsFile->addError($error, $stackPtr, 'PrivateNoUnderscore', $errorData);
+		// 	}
+		// }
 
 		// Remove a potential underscore prefix for testing CamelCaps.
 		$varName = ltrim($varName, '_');
