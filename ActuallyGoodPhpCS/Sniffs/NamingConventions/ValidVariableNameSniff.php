@@ -172,14 +172,15 @@ class ValidVariableNameSniff extends AbstractVariableSniff {
 					continue;
 				}
 
-				if (
-					CustomCommon::isSnakeCase($varName) === false &&
-					Common::isUnderscoreName($varName) === false
-				) {
-					$error = 'Variable "%s" is not in valid snake case format';
-					$data  = [$varName];
-					$phpcsFile->addError($error, $stackPtr, 'StringNotSnakeCase', $data);
-				}
+				// TODO Because this threw errors when using this..
+				// if (
+				// 	CustomCommon::isSnakeCase($varName) === false &&
+				// 	Common::isUnderscoreName($varName) === false
+				// ) {
+				// 	$error = 'Variable "%s" is not in valid snake case format';
+				// 	$data  = [$varName];
+				// 	$phpcsFile->addError($error, $stackPtr, 'StringNotSnakeCase', $data);
+				// }
 			}
 		}
 	}

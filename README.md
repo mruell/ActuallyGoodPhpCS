@@ -74,7 +74,6 @@ phpcs --config-set installed_paths "<GLOBAL_COMPOSER_PATH>\Composer\vendor\sirbr
 - [x] Other cool stuff. Look in the phpcs.xml, the comments in there descibe all includes.
 - [x] Space surrounding dots to concat strings
 - [x] Forbid empty lines at end or beginning of function and class declaration
-- [x] Force function and variable names not in classes to snake_case
 
 ### Planned features
 
@@ -82,7 +81,7 @@ phpcs --config-set installed_paths "<GLOBAL_COMPOSER_PATH>\Composer\vendor\sirbr
 - [ ] Forbid multiple empty lines in whole file
 - [ ] dirname(__FILE__) => __DIR__
 - [ ] No content on same line as after closing brace
-- [ ] Allow intances of classes in camelCase
+- [ ] Force function and variable names not in classes to snake_case again - But allow instances of classes in namelCase
 
 ### ToDo
 
