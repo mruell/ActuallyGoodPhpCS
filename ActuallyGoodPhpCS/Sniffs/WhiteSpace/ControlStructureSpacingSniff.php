@@ -138,99 +138,99 @@ class ControlStructureSpacingSniff implements Sniff
 			break;
 		}
 
-		// We ignore spacing for some structures that tend to have their own rules.
-		$ignore = [
-			T_FUNCTION             => true,
-			T_CLASS                => true,
-			T_INTERFACE            => true,
-			T_TRAIT                => true,
-			T_DOC_COMMENT_OPEN_TAG => true,
-		];
+		// // We ignore spacing for some structures that tend to have their own rules.
+		// $ignore = [
+		// 	T_FUNCTION             => true,
+		// 	T_CLASS                => true,
+		// 	T_INTERFACE            => true,
+		// 	T_TRAIT                => true,
+		// 	T_DOC_COMMENT_OPEN_TAG => true,
+		// ];
 
-		if (isset($ignore[$tokens[$firstContent]['code']]) === false
-			&& $tokens[$firstContent]['line'] >= ($tokens[$scopeOpener]['line'] + 2)
-		) {
-			$gap = ($tokens[$firstContent]['line'] - $tokens[$scopeOpener]['line'] - 1);
-			$phpcsFile->recordMetric($stackPtr, 'Blank lines at start of control structure', $gap);
+		// if (isset($ignore[$tokens[$firstContent]['code']]) === false
+		// 	&& $tokens[$firstContent]['line'] >= ($tokens[$scopeOpener]['line'] + 2)
+		// ) {
+		// 	$gap = ($tokens[$firstContent]['line'] - $tokens[$scopeOpener]['line'] - 1);
+		// 	$phpcsFile->recordMetric($stackPtr, 'Blank lines at start of control structure', $gap);
 
-			$error = 'Blank line found at start of control structure';
-			$fix   = $phpcsFile->addFixableError($error, $scopeOpener, 'SpacingAfterOpen');
+		// 	$error = 'Blank line found at start of control structure';
+		// 	$fix   = $phpcsFile->addFixableError($error, $scopeOpener, 'SpacingAfterOpen');
 
-			if ($fix === true) {
-				$phpcsFile->fixer->beginChangeset();
-				$i = ($scopeOpener + 1);
-				while ($tokens[$i]['line'] !== $tokens[$firstContent]['line']) {
-					// Start removing content from the line after the opener.
-					if ($tokens[$i]['line'] !== $tokens[$scopeOpener]['line']) {
-						$phpcsFile->fixer->replaceToken($i, '');
-					}
+		// 	if ($fix === true) {
+		// 		$phpcsFile->fixer->beginChangeset();
+		// 		$i = ($scopeOpener + 1);
+		// 		while ($tokens[$i]['line'] !== $tokens[$firstContent]['line']) {
+		// 			// Start removing content from the line after the opener.
+		// 			if ($tokens[$i]['line'] !== $tokens[$scopeOpener]['line']) {
+		// 				$phpcsFile->fixer->replaceToken($i, '');
+		// 			}
 
-					$i++;
-				}
+		// 			$i++;
+		// 		}
 
-				$phpcsFile->fixer->endChangeset();
-			}
-		} else {
-			$phpcsFile->recordMetric($stackPtr, 'Blank lines at start of control structure', 0);
-		}//end if
+		// 		$phpcsFile->fixer->endChangeset();
+		// 	}
+		// } else {
+		// 	$phpcsFile->recordMetric($stackPtr, 'Blank lines at start of control structure', 0);
+		// }//end if
 
-		if ($firstContent !== $scopeCloser) {
-			$lastContent = $phpcsFile->findPrevious(
-				T_WHITESPACE,
-				($scopeCloser - 1),
-				null,
-				true
-			);
+		// if ($firstContent !== $scopeCloser) {
+		// 	$lastContent = $phpcsFile->findPrevious(
+		// 		T_WHITESPACE,
+		// 		($scopeCloser - 1),
+		// 		null,
+		// 		true
+		// 	);
 
-			$lastNonEmptyContent = $phpcsFile->findPrevious(
-				Tokens::$emptyTokens,
-				($scopeCloser - 1),
-				null,
-				true
-			);
+		// 	$lastNonEmptyContent = $phpcsFile->findPrevious(
+		// 		Tokens::$emptyTokens,
+		// 		($scopeCloser - 1),
+		// 		null,
+		// 		true
+		// 	);
 
-			$checkToken = $lastContent;
-			if (isset($tokens[$lastNonEmptyContent]['scope_condition']) === true) {
-				$checkToken = $tokens[$lastNonEmptyContent]['scope_condition'];
-			}
+		// 	$checkToken = $lastContent;
+		// 	if (isset($tokens[$lastNonEmptyContent]['scope_condition']) === true) {
+		// 		$checkToken = $tokens[$lastNonEmptyContent]['scope_condition'];
+		// 	}
 
-			if (isset($ignore[$tokens[$checkToken]['code']]) === false
-				&& $tokens[$lastContent]['line'] <= ($tokens[$scopeCloser]['line'] - 2)
-			) {
-				$errorToken = $scopeCloser;
-				for ($i = ($scopeCloser - 1); $i > $lastContent; $i--) {
-					if ($tokens[$i]['line'] < $tokens[$scopeCloser]['line']) {
-						$errorToken = $i;
-						break;
-					}
-				}
+		// 	if (isset($ignore[$tokens[$checkToken]['code']]) === false
+		// 		&& $tokens[$lastContent]['line'] <= ($tokens[$scopeCloser]['line'] - 2)
+		// 	) {
+		// 		$errorToken = $scopeCloser;
+		// 		for ($i = ($scopeCloser - 1); $i > $lastContent; $i--) {
+		// 			if ($tokens[$i]['line'] < $tokens[$scopeCloser]['line']) {
+		// 				$errorToken = $i;
+		// 				break;
+		// 			}
+		// 		}
 
-				$gap = ($tokens[$scopeCloser]['line'] - $tokens[$lastContent]['line'] - 1);
-				$phpcsFile->recordMetric($stackPtr, 'Blank lines at end of control structure', $gap);
+		// 		$gap = ($tokens[$scopeCloser]['line'] - $tokens[$lastContent]['line'] - 1);
+		// 		$phpcsFile->recordMetric($stackPtr, 'Blank lines at end of control structure', $gap);
 
-				$error = 'Blank line found at end of control structure';
-				$fix   = $phpcsFile->addFixableError($error, $errorToken, 'SpacingBeforeClose');
+		// 		$error = 'Blank line found at end of control structure';
+		// 		$fix   = $phpcsFile->addFixableError($error, $errorToken, 'SpacingBeforeClose');
 
-				if ($fix === true) {
-					$phpcsFile->fixer->beginChangeset();
-					for ($i = ($scopeCloser - 1); $i > $lastContent; $i--) {
-						if ($tokens[$i]['line'] === $tokens[$scopeCloser]['line']) {
-							continue;
-						}
+		// 		if ($fix === true) {
+		// 			$phpcsFile->fixer->beginChangeset();
+		// 			for ($i = ($scopeCloser - 1); $i > $lastContent; $i--) {
+		// 				if ($tokens[$i]['line'] === $tokens[$scopeCloser]['line']) {
+		// 					continue;
+		// 				}
 
-						if ($tokens[$i]['line'] === $tokens[$lastContent]['line']) {
-							break;
-						}
+		// 				if ($tokens[$i]['line'] === $tokens[$lastContent]['line']) {
+		// 					break;
+		// 				}
 
-						$phpcsFile->fixer->replaceToken($i, '');
-					}
+		// 				$phpcsFile->fixer->replaceToken($i, '');
+		// 			}
 
-					$phpcsFile->fixer->endChangeset();
-				}
-			} else {
-				$phpcsFile->recordMetric($stackPtr, 'Blank lines at end of control structure', 0);
-			}//end if
-		}//end if
+		// 			$phpcsFile->fixer->endChangeset();
+		// 		}
+		// 	} else {
+		// 		$phpcsFile->recordMetric($stackPtr, 'Blank lines at end of control structure', 0);
+		// 	}//end if
+		// }//end if
 
 		$trailingContent = $phpcsFile->findNext(
 			T_WHITESPACE,
@@ -282,6 +282,9 @@ class ControlStructureSpacingSniff implements Sniff
 			&& $tokens[$trailingContent]['scope_condition'] !== $trailingContent
 			&& isset($tokens[$trailingContent]['scope_opener']) === true
 			&& $tokens[$trailingContent]['scope_opener'] !== $trailingContent
+			&& $tokens[$trailingContent]['code'] !== T_IF
+			&& $tokens[$trailingContent]['code'] !== 348
+			&& $tokens[$trailingContent]['code'] !== 352
 			&& $tokens[$trailingContent]['code'] !== T_ELSE
 			&& $tokens[$trailingContent]['code'] !== T_ELSEIF
 			&& $tokens[$trailingContent]['code'] !== T_CATCH

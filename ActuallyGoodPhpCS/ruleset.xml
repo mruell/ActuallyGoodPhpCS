@@ -51,7 +51,7 @@
 	<rule ref="Generic.Classes.DuplicateClassName"/>
 
 	<!-- Warn about TODO in comments -->
-	<rule ref="Generic.Commenting.Todo"/>
+	<!-- <rule ref="Generic.Commenting.Todo"/> -->
 
 	<!-- Show FIXME as error -->
 	<rule ref="Generic.Commenting.Fixme"/>
@@ -208,7 +208,7 @@
 	<rule ref="Generic.PHP.NoSilencedErrors"/>
 
 	<!-- Warn about commented out code -->
-	<rule ref="Squiz.PHP.CommentedOutCode"/>
+	<!-- <rule ref="Squiz.PHP.CommentedOutCode"/> -->
 
 	<!-- Disallow eval -->
 	<rule ref="Squiz.PHP.Eval"/>
